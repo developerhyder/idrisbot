@@ -1,0 +1,64 @@
+{
+  "intents":[
+    {
+      "tag": "greetings",
+      "patterns": ["Hi there", "How are you", "Is anyone there?", "Hello", "Good day"],
+      "responses": ["Hello, thanks for asking how can i help you today", "Good to see you how can i help you", "Hi there, how can I help?"],
+      "action":"image",
+      "resources": "image link",
+      "nextpattern":"",
+      "buttons":["brochure", "project progress"],
+      "context": [""]
+    },
+    {
+     "tag": "noanswer",
+     "patterns": [],
+     "responses": ["Sorry, can't understand you type 'options'- to explore various options", "Please give me more info or else type 'options'", "Not sure I understand type 'options'- for enquiry"],
+     "action":"link",
+     "resources": "https://ahad's website",
+     "nextpattern":"",
+     "buttons":["brochure"],
+     "context": [""]
+   },
+   {
+     "tag": "profile",
+     "patterns": ["profile", "show me the profile", "get me the profile"],
+     "responses": ["profile data", "profile data 2", "pro 3"],
+     "action":"link",
+     "resources": "https://developerhyder.github.io",
+     "nextpattern":"",
+     "buttons":["college", "projects"],
+     "context": [""]
+   },
+   {
+     "tag": "college",
+     "patterns": ["which college", "college", "from which college "],
+     "responses": ["REVA", "REVA2", "REVA3"],
+     "action":"image",
+     "resources": "image link",
+     "nextpattern":"--||",
+     "buttons":["age", "projects"],
+     "context": [""]
+   },
+   {
+     "tag": "age",
+     "patterns": ["--|| age", "age", "what is the age"],
+     "responses": ["22-1", "22-2", "22-3"],
+     "action":"image",
+     "resources": "image link",
+     "nextpattern":"--||",
+     "buttons":["profile", "projects"],
+     "context": [""]
+   },
+   {
+     "tag": "project",
+     "patterns": ["--|| project", "projects", "what are all the projects"],
+     "responses": ["project data", "project data2", "project data 3"],
+     "action":"image",
+     "resources": "image link",
+     "nextpattern":"--||",
+     "buttons":["profile", "projects"],
+     "context": [""]
+   }
+ ]
+}
