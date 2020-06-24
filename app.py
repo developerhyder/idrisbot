@@ -18,7 +18,7 @@ global session
 sess = tf.Session()
 set_session(sess)
 #remember to add a data.pkl here
-data = pickle.load( open( "thorsignia-ahad-assistant-data.pkl", "rb" ) )
+data = pickle.load( open( "idris-assistant-data.pkl", "rb" ) )
 words = data['words']
 classes = data['classes']
 
@@ -54,7 +54,7 @@ global graph
 graph = tf.get_default_graph()
 
 #remember to model.pkl here
-with open(f'thorsignia-ahad-assistant-model.pkl', 'rb') as f:
+with open(f'idris-assistant-model.pkl', 'rb') as f:
     model = pickle.load(f)
 model._make_predict_function()
 
