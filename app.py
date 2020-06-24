@@ -18,7 +18,7 @@ global session
 sess = tf.Session()
 set_session(sess)
 #remember to add a data.pkl here
-data = pickle.load( open( "idris-assistant-data.pkl", "rb" ) )
+data = pickle.load( open( "thorsignia-ahad-assistant-data.pkl", "rb" ) )
 words = data['words']
 classes = data['classes']
 
@@ -54,7 +54,7 @@ global graph
 graph = tf.get_default_graph()
 
 #remember to model.pkl here
-with open(f'idris-assistant-model.pkl', 'rb') as f:
+with open(f'thorsignia-ahad-assistant-model.pkl', 'rb') as f:
     model = pickle.load(f)
 model._make_predict_function()
 
@@ -65,17 +65,26 @@ def predict(input):
         return result
 
 def classify_local(sentence, intents):
-    ERROR_THRESHOLD = 0.25
+    ERROR_THRESHOLD = 0.65
     input_data = pd.DataFrame([bow(sentence, words)], dtype=float, index=['input'])
     results = predict(input_data)
     results = [[i,r] for i,r in enumerate(results) if r>ERROR_THRESHOLD]
     results.sort(key=lambda x: x[1], reverse=True)
     return_list = []
     return_resp = []
+    if not results:
+        return {
+                "intent":"noanswer",
+                "response": "for more queries contact someone",
+                "buttons":["b1", "b2"],
+                "nextpattern":"",
+                "resources":"",
+                "action":""
+        }
     for r in results:
         return_list.append((classes[r[0]], str(r[1])))
     choice = random.randint(0, len(intents['intents'][lisIndex.index(return_list[0][0])]['responses'])-1)
-
+    print("result ----", return_list)
     resp = {
         "intent": return_list[0],
         #here add rest of the feilds
@@ -90,13 +99,22 @@ def classify_local(sentence, intents):
 
 
 def chat(sentence, intents):
-    ERROR_THRESHOLD = 0.25
+    ERROR_THRESHOLD = 0.65
     input_data = pd.DataFrame([bow(sentence, words)], dtype=float, index=['input'])
     results = predict(input_data)
     results = [[i,r] for i,r in enumerate(results) if r>ERROR_THRESHOLD]
     results.sort(key=lambda x: x[1], reverse=True)
     return_list = []
     return_resp = []
+    if not results:
+        return {
+                "intent":"noanswer",
+                "response": "for more queries contact someone",
+                "buttons":["b1", "b2"],
+                "nextpattern":"",
+                "resources":"",
+                "action":""
+        }
     for r in results:
         return_list.append((classes[r[0]], str(r[1])))
     choice = random.randint(0, len(intents['intents'][results[0][0]]['responses'])-1)
