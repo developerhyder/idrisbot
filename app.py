@@ -107,14 +107,7 @@ def chat(sentence, intents):
     return_list = []
     return_resp = []
     if not results:
-        return {
-                "intent":"noanswer",
-                "response": "for more queries contact someone",
-                "buttons":["b1", "b2"],
-                "nextpattern":"",
-                "resources":"",
-                "action":""
-        }
+        return "sorry i cud not understand what u are say ing"
     for r in results:
         return_list.append((classes[r[0]], str(r[1])))
     choice = random.randint(0, len(intents['intents'][results[0][0]]['responses'])-1)
